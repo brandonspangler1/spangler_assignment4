@@ -15,9 +15,7 @@ public class DuplicateRemover {
 	
 	public void remove(String dataFile) {
 		
-		File input = new File(dataFile);
-		
-		try (Scanner sc = new Scanner(input)) {
+		try (Scanner sc = new Scanner(new File(dataFile))) {
 			while (sc.hasNextLine()) {
 				String word = sc.next();
 				word = word.toLowerCase();
@@ -26,23 +24,20 @@ public class DuplicateRemover {
 			}
 		
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error: program exiting.");
 		}
 		
 	}
 	
 	public void write(String outputFile) {
 		
-		File output = new File(outputFile);
-		
-		try (Writer write = new PrintWriter(output)) {
+		try (Writer write = new PrintWriter(new File(outputFile))) {
 			for (String word: uniqueWords) {
 				write.write(word);
 				write.write("\n");
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Error: program exiting.");
 		}
 	}
 	
