@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 
+
 public class DuplicateRemover {
 	
 	Set<String> uniqueWords = new HashSet<String>();
@@ -18,9 +19,12 @@ public class DuplicateRemover {
 		
 		try (Scanner sc = new Scanner(input)) {
 			while (sc.hasNextLine()) {
-				uniqueWords.add(sc.next());
+				String word = sc.next();
+				word = word.toLowerCase();
+				word = word.replaceAll("\\p{Punct}", "");
+				uniqueWords.add(word);
 			}
-			
+		
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
