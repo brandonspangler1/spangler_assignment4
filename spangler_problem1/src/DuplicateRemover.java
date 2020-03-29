@@ -11,33 +11,35 @@ import java.util.Set;
 
 public class DuplicateRemover {
 	
-	Set<String> uniqueWords = new HashSet<String>();
+	private Set<String> uniqueWords = new HashSet<String>();
 	
 	public void remove(String dataFile) {
 		
-		try (Scanner sc = new Scanner(new File(dataFile))) {
-			while (sc.hasNextLine()) {
-				String word = sc.next();
+		try (Scanner fileScanner = new Scanner(new File(dataFile))) {
+			while (fileScanner.hasNextLine()) {
+				String word = fileScanner.next();
 				word = word.toLowerCase();
 				word = word.replaceAll("\\p{Punct}", "");
 				uniqueWords.add(word);
 			}
 		
 		} catch (FileNotFoundException e) {
-			System.out.println("Error: program exiting.");
+			System.out.println("Error: Exceptional IO Event\nProgram exiting.");
+			System.exit(0);
 		}
 		
 	}
 	
 	public void write(String outputFile) {
 		
-		try (Writer write = new PrintWriter(new File(outputFile))) {
+		try (Writer fileWriter = new PrintWriter(new File(outputFile))) {
 			for (String word: uniqueWords) {
-				write.write(word);
-				write.write("\n");
+				fileWriter.write(word);
+				fileWriter.write("\n");
 			}
 		} catch (IOException e) {
-			System.out.println("Error: program exiting.");
+			System.out.println("Error: Exceptional IO Event\nProgram exiting.");
+			System.exit(0);
 		}
 	}
 	

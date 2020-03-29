@@ -11,13 +11,13 @@ public class DuplicateCounter {
 	
 	private Map<String, Integer> wordCounter = new HashMap<String, Integer>();
 	
-	public void count (String dataFile) {
+	public void count(String dataFile) {
 		
-		try (Scanner sc = new Scanner(new File(dataFile))) {
+		try (Scanner fileScanner = new Scanner(new File(dataFile))) {
 			
-			while (sc.hasNextLine()) {
+			while (fileScanner.hasNextLine()) {
 				
-				String word = sc.next();
+				String word = fileScanner.next();
 				word = word.toLowerCase();
 				word = word.replaceAll("\\p{Punct}", "");
 				
@@ -31,25 +31,25 @@ public class DuplicateCounter {
 			}
 			
 		} catch (FileNotFoundException e) {
-			System.out.println("Error: program exiting");
+			System.out.println("Error: Exceptional IO Event\nProgram exiting.");
 			System.exit(0);
 		}
 		
 	}
 	
-	public void write (String outputFile) {
+	public void write(String outputFile) {
 		
 		
-		try (Writer write = new PrintWriter(new File(outputFile))) {
+		try (Writer fileWriter = new PrintWriter(new File(outputFile))) {
 			
 			
 			for (String key : wordCounter.keySet()) {
-				write.write(key + " " + wordCounter.get(key) + "\n");
+				fileWriter.write(key + " " + wordCounter.get(key) + "\n");
 			
 			}
 			
 		} catch (IOException e) {
-			System.out.println("Error: program exiting.");
+			System.out.println("Error: Exceptional IO Event\nProgram exiting.");
 			System.exit(0);
 		}
 	}
