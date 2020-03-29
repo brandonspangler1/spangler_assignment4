@@ -1,0 +1,3 @@
+Create a class called DuplicateCounter. Create an instance method called count that takes a single parameter called dataFile of type String (representing the path to a text file) and uses a Map of Strings to count how many times each word occurs in dataFile. The counts should be stored in an instance variable called wordCounter. Create an instance method called write that takes a single parameter called outputFile (representing the path to a text file) and writes the contents of 
+wordCounter to the file pointed to by outputFile. The output file should be overwritten if it already exists, 
+and created if it does not exist.
